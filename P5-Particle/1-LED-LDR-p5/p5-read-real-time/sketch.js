@@ -1,40 +1,48 @@
 var data;
-var reading =0;
-var currentM;
+var reading = 0;
+var counter=0;
+
 
 function setup() {
-  createCanvas(500,500);
-  var url= 'https://api.particle.io/v1/devices/260037000447333439313830/analogvalue?access_token=27280314aec35f59f2530e76ba2e999f3600dfd9';
-  data = loadJSON(url, parseData);
-  currentM=millis();
+  createCanvas(500, 500);
+
+  setTimeout(callAPI(), 1000);
+
 }
 
 
 
 function draw() {
+
+background(255, 0, 0);
   fill(255);
-  if(millis()-currentM>500){
-    callAPI();
-    text(reading, 20,20);
-    ellipse(width/2,height/2,reading,reading);
-  }
+
+  text(reading, 20, 20);
+  ellipse(width / 2, height / 2, reading, reading);
+
+
 
 
 }
 
 
-function parseData(data){
+function parseData(data) {
 
   reading = data.result;
-  print("reading:"+reading);
+  print("reading:" + reading);
+    setTimeout(callAPI(), 1000);
 
 
 
 }
 
-function callAPI(){
-    background(255,0,0);
-  var url= 'https://api.particle.io/v1/devices/260037000447333439313830/analogvalue?access_token=27280314aec35f59f2530e76ba2e999f3600dfd9';
+function callAPI() {
+  
+
+  var url = 'https://api.particle.io/v1/devices/3a0040000851353531343431/analogvalue?access_token=27280314aec35f59f2530e76ba2e999f3600dfd9';
   data = loadJSON(url, parseData);
-  currentM=millis();
+  counter++;
+  console.log(counter);
+
+
 }
